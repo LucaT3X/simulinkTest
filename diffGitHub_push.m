@@ -1,4 +1,5 @@
 function diffGitHub_push(lastpush)
+    setenv('DISPLAY',':99');
     % Open project
     proj = openProject(pwd);
     
