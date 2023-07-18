@@ -11,12 +11,20 @@ on:
 jobs:
   my-job:
     name: Diff to Ancestor, Publish and attach Report, and Run Project Tests
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
          fetch-depth: 0
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v1
+      - name: Start Display Server
+        run: |
+         sudo apt-get install -y xvfb
+         Xvfb :99 &
+         export DISPLAY=:99
+         echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Compare Models to Ancestors
         uses: matlab-actions/run-command@v1
         with:
@@ -25,10 +33,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
            name: diffreports
-           path: ${{ github.workspace }}\*.html
+           path: ${{ github.workspace }}/*.html
       - name: Run All Project Tests
         uses: matlab-actions/run-command@v1
         with:
           command: runtests
 
-#   Copyright 2022 The MathWorks, Inc.
+#   Copyright 2022-2023 The MathWorks, Inc.
