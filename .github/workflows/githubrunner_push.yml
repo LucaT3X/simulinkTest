@@ -34,9 +34,9 @@ jobs:
         with:
            name: diffreports
            path: ${{ github.workspace }}/*.html
-      #- name: Run All Project Tests
-        #uses: matlab-actions/run-command@v1
-        #with:
-          #command: runtests
+      - name: Run All Project Tests
+        uses: matlab-actions/run-command@v1
+        with:
+          command: runtests
 
 #   Copyright 2022-2023 The MathWorks, Inc.
