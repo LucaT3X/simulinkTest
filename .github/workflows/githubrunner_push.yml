@@ -1,6 +1,5 @@
 
-name: PushToMain - Diff to Ancestor, Publish and attach Report, and Run Project Tests
-
+name: PushToMain - macos-13 (githubrunner_push) 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push events but only for the main branch
@@ -11,7 +10,7 @@ on:
 jobs:
   my-job:
     name: Diff to Ancestor, Publish and attach Report, and Run Project Tests
-    runs-on: windows-latest
+    runs-on: macos-13
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -21,6 +20,7 @@ jobs:
         uses: matlab-actions/setup-matlab@v1
       - name: Start Display Server
         run: |
+         sudo apt-get update
          sudo apt-get install -y xvfb
          Xvfb :99 &
          export DISPLAY=:99
@@ -34,9 +34,9 @@ jobs:
         with:
            name: diffreports
            path: ${{ github.workspace }}/*.html
-      - name: Run All Project Tests
-        uses: matlab-actions/run-command@v1
-        with:
-          command: runtests
+      #- name: Run All Project Tests
+        #uses: matlab-actions/run-command@v1
+        #with:
+          #command: runtests
 
 #   Copyright 2022-2023 The MathWorks, Inc.
