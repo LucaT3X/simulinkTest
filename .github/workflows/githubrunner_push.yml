@@ -1,5 +1,5 @@
 
-name: PushToMain - macos-13 (githubrunner_push) 
+name: PushToMain - ubuntu-22.04 (githubrunner_push) 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push events but only for the main branch
@@ -10,7 +10,7 @@ on:
 jobs:
   my-job:
     name: Diff to Ancestor, Publish and attach Report, and Run Project Tests
-    runs-on: macos-13
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
